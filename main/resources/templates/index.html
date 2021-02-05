@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:security="http://www.springframework.org/security/tags" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Manager Poczty Aplikacja</title>
+<link href="mystyle.css" rel="stylesheet"/>
+
+</head>
+<body>
+	<div align = "center"><h1>Witamy w aplikacji bazy danych operatora sieci komórkowej</h1></div>
+	
+	<div th:unless="${#authorization.expression('isAuthenticated()')}" align = "center">  
+        <br/><br/>
+		<br/>
+		<button class="buttonRed buttonGr" onclick="location.href='/login';">Zaloguj się</button>
+		<br/><br/>
+		<br/>
+    </div>  
+  
+            
+	
+	<div sec:authorize="hasRole('ROLE_ADMIN')" align = "center">
+		
+		<br/><br/>
+		<!-- Entry to a new page -->
+		<button onclick="location.href='/poczty';">Przejdz do Poczt</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/adresy';">Przejdz do Adresów</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/biura';">Przejdz do Biur</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/pracownicy';">Przejdz do Pracowników</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/wynagrodzenia';">Przejdz do Wynagrodzeń</button>
+		<br/><br/>
+		<br/>
+		
+	</div>
+	<div sec:authorize="hasRole('ROLE_USER')" align = "center">
+		
+		<br/><br/>
+		<!-- Entry to a new page -->
+		<button onclick="location.href='/pracownicy';">Twoje Dane</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/wynagrodzenia';">Twoje wynagrodzenia</button>
+		<br/><br/>
+		<br/>
+		
+	</div>
+	<div sec:authorize="hasRole('ROLE_MANAGER')" align = "center">
+		
+		<br/><br/>
+		<!-- Entry to a new page -->
+		<button onclick="location.href='/poczty';">Przejdz do poczt</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/adresy';">Przejdz do adresów</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/pracownicy';">Zarządzaj Pracownikami</button>
+		<br/><br/>
+		<br/>
+		<button onclick="location.href='/wynagrodzenia';">Zarządzaj Wynagrodzeniami</button>
+		<br/><br/>
+		<br/>
+		
+	</div>
+	<div th:if="${#authorization.expression('isAuthenticated()')}" align = "center">
+		<button class="buttonRed" onclick="location.href='/logout';">Logout</button>
+	</div>
+</body>
+</html>

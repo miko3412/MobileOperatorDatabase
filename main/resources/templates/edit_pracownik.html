@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Edytowanie Pracownika</title>
+<style>
+body{
+	background-image: url('/images/cos.jpg');
+  	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	background-size: cover;
+}
+td, th {
+            border: 1px solid black;
+            width: 300px;
+}
+table{
+	background-color: white;
+	border: 1px solid black;
+    width: 300px;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<!-- Page header -->
+		<h1>Edytuj Pracownika</h1>
+		
+		<br/>
+		
+		<form action = "#" th:action = "@{/pracownicy/update}" th:object="${pracownik}" method="post">
+			
+			<table border = "1" cellpadding = "10">
+			
+				<tr>
+					<td>Nr_Pracownika</td>
+					<td><input type = "text" th:field = "*{nr_pracownika}" readonly = "readonly"></td>
+				</tr>
+				<tr>
+					<td>Imie</td>
+					<td><input type = "text" th:field = "*{imie}"></td>
+				</tr>
+				<tr>
+					<td>Nazwisko</td>
+					<td><input type = "text" th:field = "*{nazwisko}"></td>
+				</tr>
+				<tr>
+					<td>Data_Urodzenia</td>
+					<td><input type = "date" th:field="*{data_urodzenia}"></td>
+				</tr>
+				<tr>
+					<td>PESEL</td>
+					<td><input type = "text" th:field = "*{pesel}"></td>
+				</tr>
+				<tr>
+					<td><label for="plec">Plec</label></td>
+					<td><select name="plec" th:field="*{plec}">
+      						<option value="M">M</option>
+      						<option value="K">K</option>
+    					</select></td>
+				</tr>
+				<tr>
+					<td>Nr_telefonu</td>
+					<td><input type = "text" th:field = "*{nr_telefonu}"></td>
+				</tr>
+				<tr>
+					<td>Nr_Biura</td>
+					<td><input type = "text" th:field = "*{nr_biura}"></td>
+				</tr>
+				<tr>
+					<td>Nr_Adresu</td>
+					<td><input type = "text" th:field = "*{nr_adresu}"></td>
+				</tr>
+				
+				<tr>
+					<td colspan = "2"><button type="submit">Zapisz</button></td>
+				</tr>
+			
+			
+			</table>
+	
+		</form>
+		<br/><br/>
+		<form>
+			<input type="button" value="Wróć" onclick="history.back()">
+		</form>
+		<br/><br/>
+		<button onclick="location.href='/';">Wróć na stronę główną</button>
+	</div>
+</body>
+</html>

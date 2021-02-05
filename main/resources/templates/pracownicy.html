@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Pracownicy</title>
+      <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+	<div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')" align = "center">
+		<h1>Baza Pracowników</h1>
+		
+		<!-- Entry to a new page -->
+		<button onclick="location.href='/pracownicy/new';">Dodaj Pracownika</button>
+		
+		<!-- Break line -->
+		<br/><br/>
+		
+		<!-- Table -->
+		<table border = "1" cellpadding="10">
+		
+			<!-- Table thead -->
+			<thead>
+				<tr>
+					<th>Nr_Pracownika</th>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Data_urodzenia</th>
+					<th>PESEL</th>
+					<th>Plec</th>
+					<th>Nr_telefonu</th>
+					<th>Nr_Biura</th>
+					<th>Nr_Adresu</th>
+					<th>Akcja</th>
+					<th>Wynagrodzenia pracownika</th>
+				</tr>
+			</thead>
+			
+			<!-- Table body -->
+			<tbody>
+				<tr th:each = "pracownik: ${listPracownicy}">
+					<td th:text = "${pracownik.nr_pracownika}">Nr_Biura</td>
+					<td th:text = "${pracownik.imie}">Imie</td>
+					<td th:text = "${pracownik.nazwisko}">Nazwisko</td>
+					<td th:text = "${pracownik.data_urodzenia}">Data_urodzenia</td>
+					<td th:text = "${pracownik.pesel}">PESEL</td>
+					<td th:text = "${pracownik.plec}">Plec</td>
+					<td th:text = "${pracownik.nr_telefonu}">Nr_telefonu</td>
+					<td th:text = "${pracownik.nr_biura}">Nr_Biura</td>
+					<td th:text = "${pracownik.nr_adresu}">Nr_Adresu</td>
+					<td>
+						<button class="buttonRed buttonGr" th:onclick="'window.location.href=\'/pracownicy/edit/' + ${pracownik.nr_pracownika} + '\''">Edytuj</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="buttonRed" th:onclick="'window.location.href=\'/pracownicy/delete/' + ${pracownik.nr_pracownika} + '\''">Usuń</button>
+					</td>
+					<td style="text-align:center">
+						<button class="buttonRed buttonBl" th:onclick="'window.location.href=\'/wynagrodzenia/pracownik/' + ${pracownik.nr_pracownika} + '\''">Wynagrodzenia</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br/><br/>
+		<form>
+			<input type="button" value="Wróć" onclick="history.back()">
+		</form>
+		<br/><br/>
+		<button onclick="location.href='/';">Wróć na stronę główną</button>
+	</div>
+	<div sec:authorize="hasAnyRole('ROLE_USER')" align = "center">
+		<h1>Baza Pracowników</h1>
+		
+		<!-- Break line -->
+		<br/><br/>
+		
+		<!-- Table -->
+		<table border = "1" cellpadding="10">
+		
+			<!-- Table thead -->
+			<thead>
+				<tr>
+					<th>Nr_Pracownika</th>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Data_urodzenia</th>
+					<th>PESEL</th>
+					<th>Plec</th>
+					<th>Nr_telefonu</th>
+					<th>Nr_Biura</th>
+					<th>Nr_Adresu</th>
+				</tr>
+			</thead>
+			
+			<!-- Table body -->
+			<tbody>
+				<tr th:object = "${pracownik}">
+					<td th:text = "${pracownik.nr_pracownika}">Nr_Biura</td>
+					<td th:text = "${pracownik.imie}">Imie</td>
+					<td th:text = "${pracownik.nazwisko}">Nazwisko</td>
+					<td th:text = "${pracownik.data_urodzenia}">Data_urodzenia</td>
+					<td th:text = "${pracownik.pesel}">PESEL</td>
+					<td th:text = "${pracownik.plec}">Plec</td>
+					<td th:text = "${pracownik.nr_telefonu}">Nr_telefonu</td>
+					<td th:text = "${pracownik.nr_biura}">Nr_Biura</td>
+					<td th:text = "${pracownik.nr_adresu}">Nr_Adresu</td>	
+				</tr>
+			</tbody>
+		</table>
+		<br/><br/>
+		<form>
+			<input type="button" value="Wróć" onclick="history.back()">
+		</form>
+		<br/><br/>
+		<button onclick="location.href='/';">Wróć na stronę główną</button>
+	</div>
+</body>
+</html>

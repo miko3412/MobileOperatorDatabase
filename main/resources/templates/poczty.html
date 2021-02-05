@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Poczty</title>
+<link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+	<div align = "center">
+		<h1>Baza Poczty</h1>
+		
+		<!-- Entry to a new page -->
+		<button sec:authorize="hasRole('ROLE_ADMIN')" onclick="location.href='/poczty/new';">Dodaj Pocztę</button>
+		<!-- Break line -->
+		<br/><br/>
+		
+		<!-- Table -->
+		<table border = "1" cellpadding="10">
+		
+			<!-- Table thead -->
+			<thead>
+				<tr>
+					<th>Nr_Poczty</th>
+					<th>Kod_Pocztowy</th>
+					<th>Nazwa_Poczty</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')" >Akcja</th>
+				</tr>
+			</thead>
+			
+			<!-- Table body -->
+			<tbody>
+				<tr th:each = "poczta: ${listPoczty}">
+					<td th:text = "${poczta.nr_poczty}">Nr_Poczty</td>
+					<td th:text = "${poczta.kod_poczty}">Kod_Pocztowy</td>
+					<td th:text = "${poczta.poczta}">Nazwa_Poczty</td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<button class="buttonRed buttonGr" th:onclick="'window.location.href=\'/poczty/edit/' + ${poczta.nr_poczty} + '\''">Edytuj</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="buttonRed" th:onclick="'window.location.href=\'/poczty/delete/' + ${poczta.nr_poczty} + '\''">Usuń</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br/><br/>
+		<form>
+			<input type="button" value="Wróć" onclick="history.back()">
+		</form>
+		<br/><br/>
+		<button onclick="location.href='/';">Wróć na stronę główną</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Edytuj Wynagrodzenie</title>
+<style>
+body{
+	background-image: url('/images/cos.jpg');
+  	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	background-size: cover;
+}
+td, th {
+            border: 1px solid black;
+            width: 300px;
+}
+table{
+	background-color: white;
+	border: 1px solid black;
+    width: 300px;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<!-- Page header -->
+		<h1>Edytuj Wynagrodzenie</h1>
+		
+		<br/>
+		
+		<form action = "#" th:action = "@{/wynagrodzenia/update}" th:object="${wynagrodzenie}" method="post">
+			
+			<table border = "1" cellpadding = "10">
+			
+				<tr>
+					<td>Nr_Wynagrodzenia</td>
+					<td><input type = "text" th:field = "*{nr_wynagrodzenia}" readonly = "readonly"></td>
+				</tr>
+				<tr>
+					<td>Data Wynagrodzenia</td>
+					<td><input type = "date" th:field = "*{data}"></td>
+				</tr>
+				<tr>
+					<td>Kwota Podstawowa</td>
+					<td><input type = "text" th:field = "*{kwota_pdst}"></td>
+				</tr>
+				<tr>
+					<td>Kwota Dodatkowa</td>
+					<td><input type = "text" th:field = "*{kwota_dod}"></td>
+				</tr>
+				<tr>
+					<td>Nr_Pracownika</td>
+					<td><input type = "text" th:field = "*{nr_pracownika}"></td>
+				</tr>
+				
+				<tr>
+					<td colspan = "2"><button type="submit">Zapisz</button></td>
+				</tr>
+			
+			
+			</table>
+	
+		</form>
+		<br/><br/>
+		<form>
+			<input type="button" value="Wróć" onclick="history.back()">
+		</form>
+		<br/><br/>
+		<button onclick="location.href='/';">Wróć na stronę główną</button>
+	</div>
+</body>
+</html>
